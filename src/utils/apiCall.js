@@ -35,15 +35,25 @@ export default class ApiCall {
   //   document.location = path
   // }
   
-  get(path, callback) {
-    return this.apiCall.get(path).then(response => 
+  get(path, params, callback) {
+    return this.apiCall.request({
+      method: 'GET',
+      url: path,
+      responseType: 'json',
+      params: params
+    }).then(response => 
       // callback(response.data, response.status)
       Promise.resolve(response.data, response.status)
     );
   }
 
-  delete(path, callback) {
-    return this.apiCall.delete(path).then(response => 
+  post(path, payload, callback) {
+    return this.apiCall.request({
+      method: 'POST',
+      url: path,
+      responseType: 'json',
+      data: payload
+    }).then(response => 
       // callback(response.data, response.status)
       Promise.resolve(response.data, response.status)
     );
@@ -73,13 +83,8 @@ export default class ApiCall {
     );
   }
 
-  post(path, payload, callback) {
-    return this.apiCall.request({
-      method: 'POST',
-      url: path,
-      responseType: 'json',
-      data: payload
-    }).then(response => 
+  delete(path, callback) {
+    return this.apiCall.delete(path).then(response => 
       // callback(response.data, response.status)
       Promise.resolve(response.data, response.status)
     );

@@ -6,6 +6,7 @@ export const Wrap = styled.div`
   margin: 0 auto;
   background-color: #20305b;
   padding: 20px;
+  padding-bottom: 0;
 
   > h1 {
     margin-bottom: 20px;

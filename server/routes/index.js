@@ -1,26 +1,8 @@
 // Controllers
-const bookController = require('../controllers/bookController');
 const lyricController = require('../controllers/lyricController');
+const userController = require('../controllers/userController');
 
 module.exports = app => {
-  // GET ALL BOOKS
-  app.get('/api/books', bookController.getAllBooks);
-
-  // GET SINGLE BOOK
-  app.get('/api/books/:book_id', bookController.getSingleBook);
-
-  // GET BOOK BY AUTHOR
-  app.get('/api/books/author/:author', bookController.getBookByAuthor);
-
-  // CREATE BOOK
-  app.post('/api/books', bookController.postCreateBook);
-
-  // UPDATE THE BOOK
-  app.put('/api/books/:book_id', bookController.putUpdateBook);
-
-  // DELETE BOOK
-  app.delete('/api/books/:book_id', bookController.deleteBook);
-
   // GET ALL LYRIC
   app.get('/api/lyrics', lyricController.getAllLyrics);
 
@@ -35,4 +17,6 @@ module.exports = app => {
 
   // DELETE LYRIC
   app.delete('/api/lyrics/:lyric_id', lyricController.deleteLyric);
+
+  app.post('/api/login', userController.login);
 }

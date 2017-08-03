@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Element } from 'react-scroll';
-import Sortable from 'react-sortablejs';
 
 export const Wrap = styled.div`
   width: 100%;
@@ -95,7 +94,7 @@ export const CustomBtn = styled.button`
 export const CustomBtnA = CustomBtn.withComponent(Link);
 
 
-export const ModalWrap = styled(Sortable)`
+export const ModalWrap = styled.div`
   color: #585858;
 
   > button {
@@ -120,6 +119,7 @@ export const Tag = styled.p`
   color: #585858;
   border: 1px solid #dfdfdf;
   cursor: pointer;
+  user-select: none;
 
   &:hover {
     background-color: #e5f1fe;
@@ -128,14 +128,7 @@ export const Tag = styled.p`
 
 export const Preview = styled.div`
   padding: 5px;
-  color: #585858;
-  font-size: 14px;
-  white-space: pre-line;
   position: relative;
-
-  &:first-child {
-    margin-top: 10px;
-  }
 
   &:hover {
     background-color: #e5f1fe;
@@ -149,6 +142,27 @@ export const Preview = styled.div`
   }
 
   p.Handle {
+    display:inline-block;
+    width: 30px;
     color: #2a2a2a;
+    text-align: center;
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    cursor: pointer;
+    background-color: #e5f1fe;
+
+    > svg {
+      position: relative;
+      top: 15px;
+    }
+  }
+
+  p.Text {
+    display:inline-block;
+    padding-left: 40px;
+    color: #585858;
+    font-size: 14px;
+    white-space: pre-line;
   }
 `
