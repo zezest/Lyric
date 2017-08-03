@@ -1,37 +1,9 @@
-put 
-{
-	"title": "title2",
-	"lyrics": [
-		{
-			"type": "v",
-			"text": "abcdefg"
-		},
-		{
-			"type": "v",
-			"text": "abcdefg"
-		}
-	]
+## server config
+```
+export default {
+  DBURL: 'mongodb://localhost/mongodb_tutorial',
 }
-
-post
-{
-	"title": "title",
-	"lyrics": [
-		{
-			"type":"v4",
-			"text":"abcdefg"
-		},
-		{
-			"type":"v2",
-			"text":"hijklm"
-		},
-		{
-			"type":"v3",
-			"text":"nopqrs"
-		}
-	]
-}
-
+```
 
 
 ## Mac osx에 MongoDB 설치 & 실행

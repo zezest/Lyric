@@ -3,6 +3,7 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const config = require('./config');
 
 const app = express();
 const buildPath = path.join(__dirname, '..', 'build');
@@ -25,7 +26,7 @@ db.once('open', () => {
   console.log("Connected to mongod server");
 });
 
-mongoose.connect('mongodb://localhost/mongodb_tutorial', {
+mongoose.connect(config.DBURL, {
   useMongoClient: true,
   /* other options */
 });
