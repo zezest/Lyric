@@ -40,7 +40,7 @@ export default class Lyric extends Component {
   getLyricList = (page = 1) => {
     apiCall.get(`/api/lyrics`, {
       page: page,
-      limit: 2,
+      limit: 10,
     }).then(data => {
       this.setState({
         list: data.lyrics,
@@ -57,7 +57,7 @@ export default class Lyric extends Component {
   render() {
     const { list, total_page, page, has_more } = this.state;
     return (
-      <Wrap>
+      <Wrap style={{paddingBottom: total_page > 1 ? '0' : '80px'}}>
         <h1>리스트</h1>
         <List>
           <li>
@@ -69,7 +69,7 @@ export default class Lyric extends Component {
           {_.map(list, item => <ItemWrap key={item._id} item={item} />)}
         </List>
 
-        <Pagination total_page={total_page} page={page} has_more={has_more} getPage={this.getLyricList} />
+        {total_page > 1 && <Pagination total_page={total_page} page={page} has_more={has_more} getPage={this.getLyricList} />}
  
       </Wrap>
     )

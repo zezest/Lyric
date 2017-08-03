@@ -29,7 +29,7 @@ export default class Pagination extends Component {
     const { page, total_page, has_more } = this.props;
     const startPage = Math.ceil(page / 10);
     const endPage = total_page > (startPage + 10) ? startPage + 10 : total_page + 1;
-    console.log(startPage)
+    
     return (
       <PaginationWrap>
         <div>
