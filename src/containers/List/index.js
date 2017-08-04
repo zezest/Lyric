@@ -7,7 +7,7 @@ import Pagination from '../../components/Pagination';
 import { apiCall } from '../../common';
 
 import {
-  Wrap, List, ListTitle, ListItem
+  Wrap, List, ListItem
 } from './styled';
 
 const ItemWrap = ({ item }) => {
@@ -35,7 +35,9 @@ export default class Lyric extends Component {
   }
 
   componentDidMount() {
-    this.getLyricList(1);
+    const { search } = this.props.location;
+    const pageStr = Number(search.substring(1).split('=')[1]);
+    this.getLyricList(pageStr || 1);
   }
 
   getLyricList = (page = 1) => {
@@ -49,6 +51,13 @@ export default class Lyric extends Component {
         page: data.page,
         total: data.total,
         total_page: data.total_page,
+      }, () => {
+        const { history, location } = this.props;
+        const { pathname } = location;
+        history.push({
+          pathname: pathname,
+          search: `?page=${this.state.page}` 
+        });
       });
     }).catch(err => {
       console.log(err);
@@ -60,14 +69,8 @@ export default class Lyric extends Component {
     return (
       <Wrap style={{paddingBottom: total_page > 1 ? '0' : '80px'}}>
         <h1>리스트</h1>
+
         <List>
-          <ListTitle>
-            <p>
-              <span>제목</span>
-              <span>가사조각</span>
-              <span>날짜</span>
-            </p>
-          </ListTitle>
           {_.map(list, item => <ItemWrap key={item._id} item={item} />)}
         </List>
 

@@ -1,5 +1,6 @@
 const Lyric = require('../models/lyric');
 const _ = require('lodash');
+const moment = require('moment');
 
 exports.getAllLyrics = (req, res) => {
   const page = Number(req.query.page) || 1;
@@ -7,7 +8,7 @@ exports.getAllLyrics = (req, res) => {
 
   Lyric.count((err, count) => {
     if (err) throw err;
-    Lyric.find({}, { _id: 1, title: 1, published_date: 1, lyrics: 1 }, (err, lyrics) => {
+    Lyric.find({}, { _id: 1, title: 1, published_date: 1, lyrics: 1, edit_date: 1 }, (err, lyrics) => {
       if (err) return res.status(500).send({ error: 'database failure', status: 500 });
 
       const array = [];
@@ -16,6 +17,7 @@ exports.getAllLyrics = (req, res) => {
           _id: lyric._id,
           title: lyric.title,
           published_date: lyric.published_date,
+          edit_date: lyric.edit_date || null,
           length: lyric.lyrics.length - 1 || '-' 
         }
         array.push(setData);
@@ -32,7 +34,7 @@ exports.getAllLyrics = (req, res) => {
       }
 
       res.json(data);
-    }).sort( { "published_date": -1 } ).skip((page - 1) * limit).limit(limit);
+    }).sort({ "published_date": -1 }).skip((page - 1) * limit).limit(limit);
   })
 }
 
@@ -65,16 +67,17 @@ exports.postCreateLyric = (req, res) => {
 }
 
 exports.putUpdateLyric = (req, res) => {
+  req.body.edit_date = moment();
   Lyric.update({ _id: req.params.lyric_id }, { $set: req.body }, (err, output) => {
     if (err) res.status(500).json({ error: 'database failure', status: 500 });
     if (!output.n) return res.status(404).json({ error: 'lyric not found', status: 404 });
     res.json( { message: 'lyric updated' } );
-  })
+  });
 }
 
 exports.deleteLyric = (req, res) => {
   Lyric.remove({ _id: req.params.lyric_id }, (err, output) => {
     if (err) return res.status(500).json({ error: "database failure", status: 500 });
     res.status(204).end();
-  })
+  });
 }

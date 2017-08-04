@@ -16,10 +16,6 @@ export const Wrap = styled.div`
 export const List = styled.ul`
 
   li {
-    &:first-child, &:last-child {
-      border-bottom: 2px solid #414f5c;
-    }
-
     > p > span, > a > span {
       &:first-child {
         display: inline-block;
@@ -39,12 +35,6 @@ export const List = styled.ul`
       }
     }
   }
-`
-
-export const ListTitle = styled.li`
-  height: 40px;
-  padding: 10px 20px;
-  line-height: 20px;
 `
 
 export const ListItem = styled.li`

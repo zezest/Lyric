@@ -19,6 +19,7 @@ export const PageBtn = styled.button`
   height: 30px;
   font-size: 14px;
   border: 0;
+  background-color: transparent;
   user-select: none;
   outline: none;
   cursor: pointer;
@@ -49,7 +50,7 @@ export const PageUl = styled.ul`
 
       &.active {
         line-height: 24px;
-        border: 2px solid #fff;
+        border: 2px solid #483D8B;
         border-radius: 50%;
       }
     }
