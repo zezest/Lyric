@@ -26,7 +26,8 @@ db.once('open', () => {
   console.log("Connected to mongod server");
 });
 
-mongoose.connect(config.DBURL, {
+const DEFAULT_DBURL = process.env.MONGODB_URI || config.DBURL;
+mongoose.connect(DEFAULT_DBURL, {
   useMongoClient: true,
   /* other options */
 });
@@ -37,5 +38,6 @@ app.get('/', (req, res) => {
 });
 
 app.listen(DEFAULT_PORT, () => {
+  console.log(process.env.MONGODB_URI)
   console.log(`서버 실행중. 포트: ${DEFAULT_PORT}`);
 });
