@@ -32,9 +32,9 @@ mongoose.connect(config.DBURL, {
 });
 // mongoose.connect('mongodb://username:password@host:port/database?options...');
 
-// app.get('/', (req, res) => {
-//   res.sendFile(`${buildPath}/index.html`);
-// });
+app.get('/', (req, res) => {
+  res.sendFile(`${buildPath}/index.html`);
+});
 
 app.listen(DEFAULT_PORT, () => {
   console.log(`서버 실행중. 포트: ${DEFAULT_PORT}`);
