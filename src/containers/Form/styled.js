@@ -70,17 +70,6 @@ export const LyricWrap = styled(Element)`
   & + & {
     border-top: 1px solid #e7e7e7;
   }
-
-  textarea {
-    width: 100%;
-    height: 120px;
-    padding: 10px 15px;
-    color: #2a2a2a;
-    font-size: 15px;
-    line-height: 20px;
-    border: 1px solid #e7e7e7;
-    resize: none;
-  }
 `
 
 export const Input = styled.input`
@@ -102,13 +91,9 @@ export const CustomBtn = styled.button`
   width: 100%;
   height: 40px;
   margin-bottom: 10px;
+  color: #fff;
   font-size: 14px;
-  cursor: pointer;
   border: 0;
-
-  &:hover {
-  }
-
-  &:active {
-  }
+  background-color: #483D8B;
+  cursor: pointer;
 `

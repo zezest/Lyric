@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom';
 import { Element } from 'react-scroll';
 
 export const Wrap = styled.div`
-  width: 100%;
-  max-width: 900px;
+  width: 900px;
   margin: 0 auto;
-  background-color: #20305b;
   padding: 20px;
   padding-bottom: 60px;
 
@@ -41,7 +39,6 @@ export const TextTitle = styled.p`
   position: absolute;
   top: 40px;
   left: 10px;
-  background-color: #20305b;
 `
 
 export const TextWrap = styled.div`
@@ -60,35 +57,13 @@ export const CustomBtn = styled.button`
   display: block;
   width: 150px;
   height: 40px;
-  margin-bottom: 10px;
   margin-right: 15px;
   color: #fff;
-  text-align: center;
   font-size: 14px;
+  text-align: center;
   line-height: 40px;
-  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
-  border: 0 solid;
-  outline: 1px solid rgba(255, 255, 255, 0.5);
-  outline-offset: 0px;
-  position: relative;
-  cursor: pointer;
-  transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
-
-  &:hover {
-    text-shadow: 1px 1px 2px #427388;
-    border: 1px solid;
-    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
-    outline-color: rgba(255, 255, 255, 0);
-    background-color: transparent;
-  }
-
-  &:active {
-    text-shadow: 0px 0px 2px #427388;
-    border: 1px solid;
-    box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.5);
-    outline: 1px solid rgba(255, 255, 255, 0.5);
-    background-color: rgba(255, 255, 255, 0.3);
-  }
+  border: 0;
+  background-color: #483D8B;
 `
 
 export const CustomBtnA = CustomBtn.withComponent(Link);

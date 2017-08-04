@@ -187,12 +187,14 @@ export default class Detail extends Component {
   onClickDelete = () => {
     const { id } = this.props.match.params;
 
-    apiCall.delete(`/api/lyrics/${id}`).then(data => {
-      alert('삭제하였습니다.');
-      window.location.href = '/list'
-    }).catch(err => {
-      console.log(err);
-    })
+    if (window.confirm('정말 삭제하시겠습니까?')) {
+      apiCall.delete(`/api/lyrics/${id}`).then(data => {
+        alert('삭제하였습니다.');
+        window.location.href = '/list'
+      }).catch(err => {
+        console.log(err);
+      });
+    }
   }
 
   render() {
@@ -202,9 +204,7 @@ export default class Detail extends Component {
 
     return (
       <Wrap>
-        <h1>상세정보</h1>
-
-        <p>{title}</p>
+        <h1>{title}</h1>
 
          {_.map(lyrics, (lyric, key) => key !== 0 && <LyricItem key={key} idx={key} lyric={lyric} />)} 
         
@@ -225,10 +225,10 @@ export default class Detail extends Component {
         <CustomBtn onClick={this.openModal}>
           순서지정
         </CustomBtn>
-        <CustomBtnA to={`/form/${id}`}>
+        <CustomBtnA to={`/form/${id}`} style={{backgroundColor:'#ff6666'}}>
           수정하기
         </CustomBtnA>
-        <CustomBtn onClick={this.onClickDelete}>
+        <CustomBtn onClick={this.onClickDelete} style={{backgroundColor:'#ff6666'}}>
           삭제하기
         </CustomBtn>
       </Wrap>

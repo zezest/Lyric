@@ -4,10 +4,12 @@ import update from 'immutability-helper';
 import { scroller, Link } from 'react-scroll';
 
 import { apiCall } from '../../common';
+import Input from '../../components/TextField/input';
+import Textarea from '../../components/TextField/textarea';
 
 import {
   Wrap, LyricFormWrap,
-  ContentTitle, Input,
+  ContentTitle,
   LyricWrap,
   CustomBtn,
 } from './styled';
@@ -15,10 +17,8 @@ import {
 const LyricItem = ({ idx, lyric, onChangeLyric, removeType }) => (
   <LyricWrap name={`tag_${idx}`}>
     <p onClick={removeType.bind(null, lyric)}>x</p>
-    <ContentTitle>type</ContentTitle>
-    <Input type="text" name="type" value={lyric.type} onChange={onChangeLyric.bind(null, idx)} autoComplete="off" />
-    <ContentTitle>text</ContentTitle>
-    <textarea name="text" value={lyric.text} onChange={onChangeLyric.bind(null, idx)} />
+    <Input type="text" name="type" value={lyric.type} onChange={onChangeLyric.bind(null, idx)} autoComplete="off" title="Type" hint="hinthinthinthinthinthinthinthint" />
+    <Textarea name="text" value={lyric.text} onChange={onChangeLyric.bind(null, idx)} title="Text" hint="hinthinthinthinthinthinthinthint" />
   </LyricWrap>
 )
 
@@ -99,6 +99,7 @@ export default class LyricForm extends Component {
 
   onChangeLyric = (idx, e) => {
     const { name, value } = e.target;
+    console.log(value)
     const lyrics = _.clone(this.state.data.lyrics);
     
     lyrics[idx][name] = value;

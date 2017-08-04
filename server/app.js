@@ -29,9 +29,7 @@ db.once('open', () => {
 const DEFAULT_DBURL = process.env.MONGODB_URI || config.DBURL;
 mongoose.connect(DEFAULT_DBURL, {
   useMongoClient: true,
-  /* other options */
 });
-// mongoose.connect('mongodb://username:password@host:port/database?options...');
 
 app.get('/', (req, res) => {
   res.sendFile(`${buildPath}/index.html`);

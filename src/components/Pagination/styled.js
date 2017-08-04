@@ -42,7 +42,6 @@ export const PageUl = styled.ul`
     > p {
       width: 26px;
       height: 26px;
-      padding-left: 1px;
       font-size: 14px;
       line-height: 26px;
       text-align: center;

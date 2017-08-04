@@ -5,7 +5,7 @@ export const Header = styled.nav`
   min-width: 900px;
   height: 60px;
   line-height: 60px;
-  background-color: #414f5c;
+  background-color: #483D8B;
   position: relative;
 
   > a {
