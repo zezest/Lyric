@@ -22,6 +22,7 @@ export const LoginForm = styled.form`
     width: 26px;
     height: 26px;
     border: 0;
+    background-color: transparent;
     position: absolute;
     top: 50%;
     right: 10px;

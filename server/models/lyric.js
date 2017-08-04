@@ -10,7 +10,8 @@ const lyricSchema = new Schema({
   title: String,
   lyrics: [lyricsSubSchema],
   patterns: Array,
-  published_date: { type: Date, default: Date.now  }
+  published_date: { type: Date, default: Date.now },
+  edit_date: Date,
 });
 
 module.exports = mongoose.model('lyric', lyricSchema);

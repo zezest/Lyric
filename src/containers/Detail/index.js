@@ -44,9 +44,16 @@ export default class Detail extends Component {
 
   getLyricData = id => {
     apiCall.get(`/api/lyrics/${id}`).then(data => {
+      const setData = update(this.state.data, {
+        title: {$set: data.title},
+        lyrics: {$set: data.lyrics},
+        patterns: {$push: data.patterns},
+      });
+
       this.setState({
-        data: data
+        data: setData
       }, () => {
+        console.log(this.state.data)
         this.setState({ fileName: this.state.data.title });
         this.joinPattern();
       })
@@ -99,8 +106,14 @@ export default class Detail extends Component {
   }
 
   joinPattern = () => {
+    const title = [];
+    _.each(this.state.data.patterns, pattern => {
+      const lyric = _.find(this.state.data.lyrics, lyric => lyric._id === pattern)
+      title.push(lyric.type);
+    });
+    const margeType = title.join('-') + '\n\n\n';
+
     const margeText = [];
-    margeText.push()
     _.each(this.state.data.patterns, pattern => {
       const lyric = _.find(this.state.data.lyrics, lyric => lyric._id === pattern)
       const array = [];
@@ -111,6 +124,7 @@ export default class Detail extends Component {
     });
 
     this.setState({
+      margeType: margeType,
       margeText: margeText,
     });
   }
@@ -151,8 +165,9 @@ export default class Detail extends Component {
       isDownload: true,
     }, () => {
       const link = document.getElementById('downloadlink');
+      const text = this.state.margeType + this.state.margeText.join('');
       setTimeout(() => {
-        link.href = this.makeTextFile(this.state.margeText.join(''));
+        link.href = this.makeTextFile(text);
       }, 100)
     })
   }
@@ -183,6 +198,7 @@ export default class Detail extends Component {
   render() {
     const { data, margeText, fileName } = this.state;
     const { title, lyrics, _id, patterns } = data;
+    const id = this.props.match.params.id;
 
     return (
       <Wrap>
@@ -190,7 +206,7 @@ export default class Detail extends Component {
 
         <p>{title}</p>
 
-         {_.map(lyrics, (lyric, key) => <LyricItem key={key} idx={key} lyric={lyric} />)} 
+         {_.map(lyrics, (lyric, key) => key !== 0 && <LyricItem key={key} idx={key} lyric={lyric} />)} 
         
         <Modal
           title="순서지정"
@@ -209,7 +225,7 @@ export default class Detail extends Component {
         <CustomBtn onClick={this.openModal}>
           순서지정
         </CustomBtn>
-        <CustomBtnA to={`/form/${_id}`}>
+        <CustomBtnA to={`/form/${id}`}>
           수정하기
         </CustomBtnA>
         <CustomBtn onClick={this.onClickDelete}>

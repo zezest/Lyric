@@ -29,19 +29,15 @@ export default class LyricForm extends Component {
       data: {
         title: '',
         lyrics: [
-          {
-            type:'',
-            text:''
-          }
+          {type:'intro', text:''},
+          {type:'', text:''},
         ],
       },
-      height: 230,
       isEdit: false,
     }
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.onScroll);
     this._isMount = true;
 
     if (this.props.match.params.id) {
@@ -56,15 +52,6 @@ export default class LyricForm extends Component {
 
   componentWillUnmount() {
     this._isMount = false;
-    window.removeEventListener('scroll', this.onScroll);
-  }
-
-  componentDidUpdate() {
-    if (this.state.height !== this._header.offsetHeight) {
-      this.setState({
-        height: this._header.offsetHeight
-      })
-    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -81,26 +68,11 @@ export default class LyricForm extends Component {
         data: {
           title: '',
           lyrics: [
-            {
-              type:'',
-              text:''
-            }
+            {type:'intro', text:''}
           ],
         },
-        height: 230,
         isEdit: false,
       });
-    }
-    
-    return true;
-  }
-
-  onScroll = e => {
-    const scrollTop = document.body.scrollTop;
-    if (scrollTop <= 60) {
-      this._header.style.top = `${60 - scrollTop}px`;
-    } else {
-      this._header.style.top = '0';
     }
   }
 
@@ -171,7 +143,6 @@ export default class LyricForm extends Component {
 
   onClickTag = (idx, e) => {
     scroller.scrollTo(`tag_${idx}`, {
-      offset: -this.state.height,
       duration: 500,
       smooth: 'easeInOutQuint',
     });
@@ -188,18 +159,29 @@ export default class LyricForm extends Component {
     let msg = '';
     let validate = true;
 
-    _.map(lyrics, lyric => {
-      if (lyric.type === '') {
-        msg = 'Type을 입력해주세요.';
-        validate = false;
-        return false;
+    _.each(lyrics, (lyric, key) => {
+      if (key !== 0) {
+        if (lyric.type === '') {
+          msg = 'Type을 입력해주세요.';
+          validate = false;
+          return false;
+        }
+
+        if (lyric.text === '') {
+          msg = 'Text를 입력해주세요.';
+          validate = false;
+          return false;
+        }
+
+        _.each(lyrics, (lyric2, key2) => {
+          if (key !== key2 && lyric.type === lyric2.type) {
+            msg = '중복된 Type명이 있습니다.';
+            validate = false;
+            return false;
+          }
+        });
       }
-      if (lyric.text === '') {
-        msg = 'Text를 입력해주세요.';
-        validate = false;
-        return false;
-      }
-    })
+    });
 
     if (!validate) {
       alert(msg)
@@ -240,7 +222,7 @@ export default class LyricForm extends Component {
   }
 
   render() {
-    const { data, height, isEdit } = this.state;
+    const { data, isEdit } = this.state;
     const { title, lyrics } = data;
 
     return (
@@ -257,7 +239,6 @@ export default class LyricForm extends Component {
                       activeClass="active"
                       className={`tag_${key}`}
                       to={`tag_${key}`}
-                      offset={-height}
                       spy={true}
                       isDynamic={true}
                       smooth="easeInOutQuint"
@@ -276,9 +257,9 @@ export default class LyricForm extends Component {
             <Input type="text" name="title" value={title} onChange={this.onChangeToState} autoComplete="off" />
           </div>
 
-          <div className="Body" style={{marginTop: `${height}px`}}>
+          <div className="Body">
             {_.map(lyrics, (lyric, key) => 
-              <LyricItem key={key} idx={key} lyric={lyric} onChangeLyric={this.onChangeLyric} removeType={this.removeType} />
+              key !== 0 && <LyricItem key={key} idx={key} lyric={lyric} onChangeLyric={this.onChangeLyric} removeType={this.removeType} />
             )}
            
             <CustomBtn type="submit">{isEdit ? '수정완료' : '등록하기'}</CustomBtn>

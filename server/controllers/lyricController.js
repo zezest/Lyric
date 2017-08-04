@@ -1,4 +1,5 @@
 const Lyric = require('../models/lyric');
+const _ = require('lodash');
 
 exports.getAllLyrics = (req, res) => {
   const page = Number(req.query.page) || 1;
@@ -6,12 +7,23 @@ exports.getAllLyrics = (req, res) => {
 
   Lyric.count((err, count) => {
     if (err) throw err;
-    Lyric.find({}, { _id: 1, title: 1, published_date: 1 }, (err, lyrics) => {
+    Lyric.find({}, { _id: 1, title: 1, published_date: 1, lyrics: 1 }, (err, lyrics) => {
       if (err) return res.status(500).send({ error: 'database failure', status: 500 });
+
+      const array = [];
+      _.each(lyrics, lyric => {
+        const setData = {
+          _id: lyric._id,
+          title: lyric.title,
+          published_date: lyric.published_date,
+          length: lyric.lyrics.length - 1 || '-' 
+        }
+        array.push(setData);
+      });
 
       const total_page = Math.ceil(count / limit);
       const data = {
-        lyrics: lyrics,
+        lyrics: array,
         has_more: !(page === total_page),
         limit: limit,
         total: count,
@@ -20,7 +32,7 @@ exports.getAllLyrics = (req, res) => {
       }
 
       res.json(data);
-    }).sort( { "published_date": 1 } ).skip((page - 1) * limit).limit(limit);
+    }).sort( { "published_date": -1 } ).skip((page - 1) * limit).limit(limit);
   })
 }
 

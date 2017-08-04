@@ -2,13 +2,15 @@ import styled from 'styled-components';
 
 export const Header = styled.nav`
   width: 100%;
+  min-width: 900px;
   height: 60px;
   line-height: 60px;
-  background-color: #0F162A;
+  background-color: #414f5c;
   position: relative;
 
   > a {
     margin: 0 20px 0 10px;
+    color: #fff;
     position: absolute;
     right: 0;
   }

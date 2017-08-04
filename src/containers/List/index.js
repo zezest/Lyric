@@ -7,17 +7,18 @@ import Pagination from '../../components/Pagination';
 import { apiCall } from '../../common';
 
 import {
-  Wrap, List
+  Wrap, List, ListTitle, ListItem
 } from './styled';
 
 const ItemWrap = ({ item }) => {
   return (
-    <li>
+    <ListItem>
       <Link to={`/detail/${item._id}`}>
         <span>{item.title}</span>
+        <span>{`${item.length} 조각` || '-'}</span>
         <span>{moment(item.published_date).format('YYYY-MM-DD')}</span>
       </Link>
-    </li>
+    </ListItem>
   )
 }
 
@@ -60,12 +61,13 @@ export default class Lyric extends Component {
       <Wrap style={{paddingBottom: total_page > 1 ? '0' : '80px'}}>
         <h1>리스트</h1>
         <List>
-          <li>
+          <ListTitle>
             <p>
               <span>제목</span>
+              <span>가사조각</span>
               <span>날짜</span>
             </p>
-          </li>
+          </ListTitle>
           {_.map(list, item => <ItemWrap key={item._id} item={item} />)}
         </List>
 
