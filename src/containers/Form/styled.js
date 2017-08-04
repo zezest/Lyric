@@ -38,9 +38,9 @@ export const LyricFormWrap = styled.form`
           display: inline;
           margin-right: 10px;
           padding: 5px 10px;
-          color: #fff;
+          color: #483D8B;
           font-size: 14px;
-          border: 1px solid #fff;
+          border: 1px solid #483D8B;
           background-color: rgba(255, 255, 255, 0.1);
           cursor: pointer;
         }
