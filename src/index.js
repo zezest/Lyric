@@ -44,9 +44,10 @@ render(
     <div>
       <Header>
         <Menu>
-          <li>
-            <NavLink activeClassName="active" to="/main">Lyric</NavLink>
-          </li>
+           <li>
+             <a href="/list" style={{color:'#fff'}}><h1>LYRICS</h1></a>
+            {/* <NavLink activeClassName="active" to="/main">Lyric</NavLink> */}
+          </li> 
           <li>
             <NavLink activeClassName="active" to="/list">List</NavLink>
           </li>
@@ -54,15 +55,16 @@ render(
             <NavLink activeClassName="active" to="/form">Add</NavLink>
           </li>
         </Menu>
-        <AuthButton />
+        {/* <AuthButton /> */}
       </Header>
       <Switch>
-        <Route exact path="/" component={Login} />
-        <PrivateRoute path="/main" component={Main} />
-        <PrivateRoute path="/list" component={List}/>
-        <PrivateRoute path="/form/:id" component={Form} /> 
-        <PrivateRoute path="/form" component={Form} />
-        <PrivateRoute path="/detail/:id" component={Detail} />
+        {/* <Route exact path="/" component={Login} /> */}
+        {/* <Route path="/main" component={Main} /> */}
+        <Route exact path="/list" component={List}/>
+        <Route path="/form/:id" component={Form} /> 
+        <Route path="/form" component={Form} />
+        <Route path="/detail/:id" component={Detail} />
+        <Redirect from="*" to="/list" />
         <Route component={NoMatch} />
       </Switch>
     </div>

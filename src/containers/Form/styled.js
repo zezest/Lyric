@@ -70,21 +70,18 @@ export const LyricWrap = styled(Element)`
   & + & {
     border-top: 1px solid #e7e7e7;
   }
+
+  > button {
+    width: 45px;
+    height: 30px;
+    color: #fff;
+    font-size: 14px;
+    border: 0;
+    background-color: #483D8B;
+    cursor: pointer;
+  }
 `
 
-export const Input = styled.input`
-  width: 100%;
-  height: 40px;
-  padding: 5px 15px;
-  color: #2a2a2a;
-  font-size: 15px;
-  border: 1px solid #e7e7e7;
-`
-
-export const ContentTitle = styled.p`
-  font-size: 16px;
-  margin: 10px 0 10px;
-`
 
 export const CustomBtn = styled.button`
   display: block;

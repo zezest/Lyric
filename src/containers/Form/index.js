@@ -16,9 +16,9 @@ import {
 
 const LyricItem = ({ idx, lyric, onChangeLyric, removeType }) => (
   <LyricWrap name={`tag_${idx}`}>
-    <p onClick={removeType.bind(null, lyric)}>x</p>
-    <Input type="text" name="type" value={lyric.type} onChange={onChangeLyric.bind(null, idx)} autoComplete="off" title="Type" hint="hinthinthinthinthinthinthinthint" />
-    <Textarea name="text" value={lyric.text} onChange={onChangeLyric.bind(null, idx)} title="Text" hint="hinthinthinthinthinthinthinthint" />
+    <button type="button" onClick={removeType.bind(null, lyric)}>제거</button>
+    <Input type="text" name="type" value={lyric.type} onChange={onChangeLyric.bind(null, idx)} autoComplete="off" title="Type" hint="EX) V, P.C, C, B, INTERUDE 등" />
+    <Textarea name="text" value={lyric.text} onChange={onChangeLyric.bind(null, idx)} title="Text" hint="EX) 가사, 간주 등" />
   </LyricWrap>
 )
 
@@ -254,8 +254,7 @@ export default class LyricForm extends Component {
                 <CustomBtn type="button" onClick={this.addForm}>타입추가</CustomBtn>
               </div>
             </div>
-            <ContentTitle>제목</ContentTitle>
-            <Input type="text" name="title" value={title} onChange={this.onChangeToState} autoComplete="off" />
+            <Input type="text" name="title" value={title} onChange={this.onChangeToState} autoComplete="off" title="Title" hint="곡명을 입력해주세요." />
           </div>
 
           <div className="Body">
