@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import { Element } from 'react-scroll';
 
 export const Wrap = styled.div`
-  width: 100%;
-  max-width: 900px;
+  width: 900px;
   margin: 0 auto;
 `
 
@@ -43,6 +42,10 @@ export const LyricFormWrap = styled.form`
           border: 1px solid #483D8B;
           background-color: rgba(255, 255, 255, 0.1);
           cursor: pointer;
+
+          &:hover {
+            background-color: #e5f1fe;
+          }
         }
       }
 
@@ -79,6 +82,7 @@ export const LyricWrap = styled(Element)`
     border: 0;
     background-color: #483D8B;
     cursor: pointer;
+    float: right;
   }
 `
 

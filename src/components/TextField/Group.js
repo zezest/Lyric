@@ -10,12 +10,7 @@ const Group = WrappedComponet => class extends Component {
     }
   }
 
-  componentDidMount() {
-    console.log(this.props);
-  }
-
   onFocus = () => {
-    console.log('onFocus')
     this.setState({
       isFocus: true
     })
@@ -25,10 +20,6 @@ const Group = WrappedComponet => class extends Component {
     this.setState({
       isFocus: false
     })
-  }
-
-  onKeyDown = e => {
-    console.log(e)
   }
 
   render() {

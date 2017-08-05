@@ -14,7 +14,7 @@ export const FormGroup = styled.label`
     line-height: 2rem;
     width: 100%;
     color: #2a2a2a;
-    transition: all 0.28s ease;
+    // transition: all 0.1s ease-out;
     outline: none;
   }
 
