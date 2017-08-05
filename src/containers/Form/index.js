@@ -203,8 +203,8 @@ export default class LyricForm extends Component {
     const { isEdit, id } = this.state;
     if (isEdit) {
       apiCall.put(`/api/lyrics/${id}`, this.state.data).then(data => {
-        alert('수정하였습니다.')
-        window.location.href = '/list';
+        alert('수정에 성공하였습니다.')
+        window.location.href = `/detail/${id}`;
 
       }).catch(err => {
         console.log(err)
@@ -217,8 +217,7 @@ export default class LyricForm extends Component {
 
       }).catch(err => {
         console.log(err)
-      })
-
+      });
     }
   }
 

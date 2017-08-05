@@ -7,17 +7,29 @@ export const Wrap = styled.div`
   margin: 0 auto;
   padding: 20px;
   padding-bottom: 60px;
+`
 
+export const Header = styled.div`
   > h1 {
     margin-bottom: 20px;
-    font-size: 18px;
+    font-size: 20px;
+  }
+  > p {
+    color: #585858;
+    font-size: 14px;
+    line-height: 1.3rem;
+
+    &:last-child {
+      margin-bottom: 20px;
+    }
   }
 `
 
 export const LyricWrap = styled(Element)`
   width: 100%;
   margin-bottom: 20px;
-  padding: 10px 0;
+  padding: 10px;
+  background-color: #f1f1f1;
   position: relative;
 
   & + & {
@@ -25,30 +37,17 @@ export const LyricWrap = styled(Element)`
   }
 `
 
-export const ContentTitle = styled.p`
-  font-size: 16px;
-  margin: 10px 0 20px;
-  position: relative;
-  bottom: 0px;
-`
-
 export const TextTitle = styled.p`
+  padding: 10px 0;
   font-size: 16px;
-  margin: 10px 0 10px;
-  padding: 0 4px;
-  position: absolute;
-  top: 40px;
-  left: 10px;
+  line-height: 2rem;
+  border-bottom: 1px solid #d1d1d1;
 `
 
 export const TextWrap = styled.div`
-  width: 100%;
-  padding: 10px;
-  padding-top: 15px;
+  padding: 10px 0;
   font-size: 15px;
-  line-height: 20px;
-  border-radius: 5px;
-  border: 1px solid #fff;
+  line-height: 2rem;
   white-space: pre-wrap;
 `
 
@@ -64,6 +63,7 @@ export const CustomBtn = styled.button`
   line-height: 40px;
   border: 0;
   background-color: #483D8B;
+  cursor: pointer;
 `
 
 export const CustomBtnA = CustomBtn.withComponent(Link);

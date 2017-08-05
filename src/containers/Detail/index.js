@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import update from 'immutability-helper';
+import _ from 'lodash';
+import moment from 'moment';
 
 import Modal from './Modal';
 import { apiCall } from '../../common';
 
 import {
-  Wrap, 
-  LyricWrap, ContentTitle, TextTitle, TextWrap, 
+  Wrap, Header,
+  LyricWrap, TextTitle, TextWrap, 
   CustomBtn, CustomBtnA
 } from './styled';
 
 const LyricItem = ({ idx, lyric }) => (
   <LyricWrap name={`tag_${idx}`}>
-    <ContentTitle>{lyric.type}</ContentTitle>
-    <TextTitle>text</TextTitle>
+    <TextTitle>{lyric.type}</TextTitle>
     <TextWrap>{lyric.text}</TextWrap>
   </LyricWrap>
 )
@@ -48,12 +48,13 @@ export default class Detail extends Component {
         title: {$set: data.title},
         lyrics: {$set: data.lyrics},
         patterns: {$push: data.patterns},
+        published_date: {$set: data.published_date},
+        edit_date: {$set: data.edit_date},
       });
 
       this.setState({
         data: setData
       }, () => {
-        console.log(this.state.data)
         this.setState({ fileName: this.state.data.title });
         this.joinPattern();
       })
@@ -93,7 +94,7 @@ export default class Detail extends Component {
       if (key === idx) return;
       array.push(pattern);
     })
-    console.log(array);
+    
     const setData = update(this.state.data, {
       patterns: {$set: array},
     });
@@ -199,12 +200,16 @@ export default class Detail extends Component {
 
   render() {
     const { data, margeText, fileName } = this.state;
-    const { title, lyrics, _id, patterns } = data;
+    const { title, lyrics, _id, patterns, published_date, edit_date } = data;
     const id = this.props.match.params.id;
 
     return (
       <Wrap>
-        <h1>{title}</h1>
+        <Header>
+          <h1>{title}</h1>
+          <p>작성일: {moment(published_date).format('YYYY-MM-DD HH:mm:ss')}</p>
+          {edit_date && <p>마지막 수정일: {moment(edit_date).format('YYYY-MM-DD HH:mm:ss')}</p>}
+        </Header>
 
          {_.map(lyrics, (lyric, key) => key !== 0 && <LyricItem key={key} idx={key} lyric={lyric} />)} 
         
