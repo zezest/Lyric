@@ -78,6 +78,7 @@ export const ModalWrap = styled.div`
     color: #585858;
     font-size: 14px;
     border: 1px solid #ebebeb;
+    background-color: #fff;
     outline: none;
     cursor: pointer;
 
@@ -103,17 +104,37 @@ export const Tag = styled.p`
 
 export const Preview = styled.div`
   padding: 5px;
+  margin-bottom: 5px;
   position: relative;
-
-  &:hover {
-    background-color: #e5f1fe;
-  }
+  border: 1px solid #e5f1fe;
 
   > a {
+    display: inline-block;
+    width: 30px;
     position: absolute;
     top: 5px;
-    right: 5px;
+    right: 0;
+    bottom: 5px;
     cursor: pointer;
+
+    > svg {
+      width: 16px;
+      height: 16px;
+      fill: #ff6666;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 0.2s ease-in-out;    
+    }
+
+    &:hover {
+      > svg {
+        width: 20px;
+        height: 20px;
+        fill: #ff3333;
+      }
+    }
   }
 
   p.Handle {
@@ -124,12 +145,39 @@ export const Preview = styled.div`
     position: absolute;
     top: 5px;
     bottom: 5px;
-    cursor: pointer;
+    cursor: move;
     background-color: #e5f1fe;
 
     > svg {
-      position: relative;
-      top: 15px;
+      fill: #585858;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      > g {
+        > rect {
+          transition: all 0.2s ease-in-out;        
+        }
+      }
+    }
+
+    &:hover {
+      > svg {
+        > g {
+          > rect {
+            height: 64px !important;
+
+            &:first-child {
+              y: 96 !important;
+            }
+
+            &:last-child {
+              y: 384 !important;
+            }
+          }
+        }
+      }
     }
   }
 

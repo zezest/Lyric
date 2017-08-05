@@ -34,11 +34,16 @@ export const Footer = styled.div`
     font-size: 14px;
     border: 0;
     border-top: 1px solid #ebebeb;
+    background-color: transparent;
     outline: none;
     cursor: pointer;
 
     & + button {
       border-left: 1px solid #ebebeb;
+    }
+
+    &:hover {
+      background-color: #e5f1fe;
     }
   }
 
@@ -46,9 +51,5 @@ export const Footer = styled.div`
     display: inline-block;
     line-height: 50px;
     text-align: center;
-
-    &:hover {
-      background-color: #e5f1fe;
-    }
   }
 `

@@ -24,10 +24,12 @@ const SetPattern = ({ lyrics, margeText, onClickTag, removePattern, onChangePatt
       >
         {_.map(margeText, (text, key) => 
           <Preview className="Text" key={key} data-id={key}>
-            <p className="Handle"><Icon name="handle" width="15" height="15" /></p>
+            <p className="Handle">
+              <Icon name="handle" width="15" height="15" />
+            </p>
             <p className="Text">{text}</p>
             <a onClick={removePattern.bind(null, key)}>
-              <Icon name="x" width="10" height="10" />
+              <Icon name="bin" />
             </a>
           </Preview>
         )}
