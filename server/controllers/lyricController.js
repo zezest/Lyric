@@ -47,9 +47,34 @@ exports.getSingleLyric = (req, res) => {
 }
 
 exports.getSearchLyrics = (req, res) => {
-  Lyric.find({}, { _id: 1, title: 1, published_date: 1 }, (err, lyrics) => {
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 2
 
-  })
+  Lyric.count((err, count) => {
+    Lyric.find({title: {$regex: new RegExp(req.params.title), $options: 'i'}}, { _id: 1, title: 1, published_date: 1 }, (err, lyrics) => {
+      if (err) return res.status(500).json({ error: err, status: 500 });
+
+      const array = [];
+      _.each(lyrics, lyric => {
+        const setData = {
+          _id: lyric._id,
+          title: lyric.title,
+          published_date: lyric.published_date
+        }
+        array.push(setData);
+      });
+
+      const total_page = Math.ceil(count / limit);
+      const data = {
+        lyrics: array,
+        has_more: !(page === total_page),
+        limit: limit,
+        page: page,
+        total_page: total_page,
+      }
+      res.json(data);
+    }).sort({"published_date": -1 }).skip((page - 1) * limit).limit(limit);
+  });
 }
 
 exports.postCreateLyric = (req, res) => {

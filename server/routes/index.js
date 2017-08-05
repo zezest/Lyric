@@ -18,5 +18,9 @@ module.exports = app => {
   // DELETE LYRIC
   app.delete('/api/lyrics/:lyric_id', lyricController.deleteLyric);
 
+  // FIND LYRICS BY TITLE
+  app.get('/api/lyrics/title/:title', lyricController.getSearchLyrics);
+
+
   app.post('/api/login', userController.login);
 }
