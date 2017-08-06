@@ -14,6 +14,7 @@
     "moment": "^2.18.1",
     "mongoose": "^4.11.5",
     "morgan": "^1.8.2",
+    "polished": "^1.3.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

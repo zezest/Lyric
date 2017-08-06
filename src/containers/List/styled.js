@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { clearFix } from 'polished';
 
 export const Wrap = styled.div`
   width: 100%;
@@ -53,5 +54,30 @@ export const ListItem = styled.li`
     &:hover {
       box-shadow: 0px 0px 10px 3px #95c8ff;
     }
+  }
+`
+
+export const Header = styled.div`
+  ${clearFix()}
+`
+
+export const SearchBox = styled.div`
+  width: 250px;
+  float: right;
+
+  > label {
+    display: inline-block;
+    width: 85%;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  > button {
+    color: #fff;
+    height: 32px;
+    width: 15%;
+    background-color: #483D8B;
+    cursor: pointer;
+    border: 0;
   }
 `
