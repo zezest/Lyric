@@ -213,7 +213,7 @@ export default class LyricForm extends Component {
     } else {
       apiCall.post('/api/lyrics', this.state.data).then(data => {
         alert('등록에 성공하였습니다.')
-        window.location.href = '/list';
+        window.location.href = '/list?page=1';
 
       }).catch(err => {
         console.log(err)
