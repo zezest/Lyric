@@ -16,7 +16,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(buildPath));
 
-const router = require('./routes')(app);
 
 // // CONNECT TO MONGODB SERVER
 const db = mongoose.connection;
@@ -31,7 +30,9 @@ mongoose.connect(DEFAULT_DBURL, {
   useMongoClient: true,
 });
 
-app.get('/', (req, res) => {
+const router = require('./routes')(app);
+
+app.get('*', (req, res) => {
   res.sendFile(`${buildPath}/index.html`);
 });
 
