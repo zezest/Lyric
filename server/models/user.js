@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt-nodejs');
+const SALT_WORK_FACTOR = 10;
 
 const userSchema = new Schema({
   name: String,
@@ -7,6 +9,23 @@ const userSchema = new Schema({
   password: String,
   save_date: { type: Date, default: Date.now  },
   edit_date: Date
+});
+
+userSchema.pre('save', function(next) {
+   if(!this.isModified('password')) {
+    return next();
+   } else {
+    bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
+    if(err) return next(err);
+
+    bcrypt.hash(this.password, salt, null, (err, hash) => {
+      if(err) return next(err);
+
+        this.password = hash;
+        next();
+      });
+    });
+  }
 });
 
 module.exports = mongoose.model('user', userSchema);

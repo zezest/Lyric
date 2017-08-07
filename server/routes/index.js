@@ -23,4 +23,8 @@ module.exports = app => {
 
 
   app.post('/api/login', userController.login);
+
+
+  // JOIN
+  app.post('/api/user/add', userController.signup);
 }
