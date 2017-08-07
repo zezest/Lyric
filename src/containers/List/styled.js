@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { clearFix } from 'polished';
+// import { clearFix } from 'polished';
 
 export const Wrap = styled.div`
   width: 100%;
@@ -15,7 +15,7 @@ export const Wrap = styled.div`
 `
 
 export const List = styled.ul`
-
+  margin-top: 80px;
   li {
     > p > span, > a > span {
       &:first-child {
@@ -58,12 +58,15 @@ export const ListItem = styled.li`
 `
 
 export const Header = styled.div`
-  ${clearFix()}
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
 `
 
 export const SearchBox = styled.div`
   width: 250px;
-  float: right;
+  position: absolute;
+  right: 0;
 
   > label {
     display: inline-block;

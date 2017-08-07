@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+
 import Icon from '../../components/Icon';
 
-import { auth } from '../../common';
+import { apiCall } from '../../common';
 
 import {
   LoginWrap, LoginForm, PasswordInput
@@ -12,6 +12,8 @@ export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: '',
+      email: '',
       password: '',
       redirectToReferrer: false,
     }
@@ -26,26 +28,18 @@ export default class Main extends Component {
 
   login = e => {
     e.preventDefault();
-    auth.authenticate(() => {
-      this.setState({ redirectToReferrer: true })
-    })
+
   }
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
-    const { redirectToReferrer } = this.state;
-
-    if (redirectToReferrer) {
-      return (
-        <Redirect to={from}/>
-      )
-    }
 
     return (
       <LoginWrap>
-        <p>비밀번호 입력</p>
+        <p>로그인</p>
         <LoginForm onSubmit={this.login}>
+          <PasswordInput type="text" name="email" value={this.state.passoword} onChange={this.onChangeToState} />
           <PasswordInput type="text" name="password" value={this.state.passoword} onChange={this.onChangeToState} />
+          <PasswordInput type="text" name="name" value={this.state.passoword} onChange={this.onChangeToState} />
           <button type="submit">
             <Icon name="arrow>" width="26" height="26" />
           </button>

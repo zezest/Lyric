@@ -5,7 +5,8 @@ const userSchema = new Schema({
   name: String,
   email: String,
   password: String,
-  join_date: { type: Date, default: Date.now  }
+  save_date: { type: Date, default: Date.now  },
+  edit_date: Date
 });
 
 module.exports = mongoose.model('user', userSchema);
