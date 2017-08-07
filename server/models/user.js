@@ -28,6 +28,11 @@ userSchema.pre('save', function(next) {
   }
 });
 
+userSchema.methods.chkPassword = function(password) {
+  return bcrypt.compareSync(password, this.password);
+};
+
+
 module.exports = mongoose.model('user', userSchema);
 
 /**

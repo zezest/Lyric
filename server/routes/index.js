@@ -1,6 +1,7 @@
 // Controllers
 const lyricController = require('../controllers/lyricController');
 const userController = require('../controllers/userController');
+const passport = require('passport');
 
 module.exports = app => {
   // GET ALL LYRIC
@@ -22,9 +23,15 @@ module.exports = app => {
   app.get('/api/lyrics/title/:title', lyricController.getSearchLyrics);
 
 
-  app.post('/api/login', userController.login);
-
-
   // JOIN
-  app.post('/api/user/add', userController.signup);
+  app.get('/api/user/add', userController.signup);
+  
+  // LOGIN
+  app.get('/api/user/login', passport.authenticate('login', {
+    successRedirect : '/list', 
+    failureRedirect : '/login', //로그인 실패시 redirect할 url주소
+  }))
+
+  // LOGOUT
+  app.get('/api/user/logout', userController.logout);
 }

@@ -4,6 +4,8 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const config = require('./config');
+const passport = require('passport');
+const session = require('express-session');
 
 const app = express();
 const buildPath = path.join(__dirname, '..', 'build');
@@ -24,6 +26,16 @@ db.once('open', () => {
   // CONNECTED TO MONGODB SERVER
   console.log("Connected to mongod server");
 });
+
+require('./config/passport')(passport);
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}));
 
 const DEFAULT_DBURL = process.env.MONGODB_URI || config.DBURL;
 mongoose.connect(DEFAULT_DBURL, {
