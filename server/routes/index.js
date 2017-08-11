@@ -22,6 +22,8 @@ module.exports = app => {
   // FIND LYRICS BY TITLE
   app.get('/api/lyrics/title/:title', lyricController.getSearchLyrics);
 
+  app.post('/api/lyrics/send', lyricController.sendLyric);
+  
 
   // JOIN
   app.get('/api/user/add', userController.signup);

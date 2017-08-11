@@ -1,6 +1,7 @@
 const Lyric = require('../models/lyric');
 const _ = require('lodash');
 const moment = require('moment');
+const emailService = require('../services/emailService');
 
 exports.getAllLyrics = (req, res) => {
   const page = Number(req.query.page) || 1;
@@ -106,4 +107,82 @@ exports.deleteLyric = (req, res) => {
     if (err) return res.status(500).json({ error: "database failure", status: 500 });
     res.status(204).end();
   });
+}
+
+
+exports.sendLyric = (req, res) => {
+//   let ids = req.body.ids;
+//   const sendFile = [];
+// console.log('ids', ids)
+//   _.forEach(ids, id => {
+//     Lyric.findById({ _id: id }, { title: 1, patterns: 1, lyrics: 1 }, (err, lyric) => {
+//       if (err) return res.status(500).json({ error: "database failure", status: 500 });
+//       if(lyric.patterns.length === 0){ return false; }
+      
+//       const lyrics = lyric.lyrics;
+
+//       const title = [];
+
+//       _.each(lyric.patterns, pattern => {
+//         const lyric = _.find(lyrics, lyric => {
+//           return lyric._id == pattern;
+//         });
+//         title.push(lyric.type);
+//       });
+//       const titles = title.join('-') + '\n\n\n';
+
+//       const text = [];
+
+//       _.each(lyric.patterns, pattern => {
+//         const lyric = _.find(lyrics, lyric => {
+//           return lyric._id == pattern;
+//         });
+//         const array = [];
+//         array.push(`<${lyric.type}>\n`);
+//         array.push(`${lyric.text}\n`);
+//         array.push('\n');
+//         text.push(array.join(''));
+//       });
+
+//       console.log('titles', titles)
+//       console.log('text', text)
+//       const context = [];
+//       context.push(titles);
+//       context.push(text.join(''));
+
+
+//       sendFile.push(context.join(''));
+//       // return context.join('');
+//     });
+//   });
+
+//   console.log(sendFile);
+
+
+  return res.json( { message: 'ok'} );
+
+  // let id = req.query.id;
+  // const types = req.query.type;
+
+  // Lyric.findById({ _id: id }, (err, lyric) => {
+  //   const lyrics = lyric.lyrics;
+  //   const context = [types];
+
+  //   types.trim().split('-').forEach((type) => {
+  //     _.each(lyrics, item => {
+  //       if(item.type === type) {
+  //         const array = [];
+  //         array.push('<' + type + '>\n');
+  //         array.push(item.text + '\n');
+  //         type === 'intro' ? null : array.push('\n');
+
+  //         context.push(array.join(''));
+  //       }
+  //     });
+  //   });
+
+  //   emailService.send(context.join(''));
+  // });
+
+  // res.json( { message: 'ok' } );
 }
