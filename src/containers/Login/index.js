@@ -39,7 +39,6 @@ export default class Main extends Component {
         <LoginForm onSubmit={this.login}>
           <PasswordInput type="text" name="email" value={this.state.passoword} onChange={this.onChangeToState} />
           <PasswordInput type="text" name="password" value={this.state.passoword} onChange={this.onChangeToState} />
-          <PasswordInput type="text" name="name" value={this.state.passoword} onChange={this.onChangeToState} />
           <button type="submit">
             <Icon name="arrow>" width="26" height="26" />
           </button>

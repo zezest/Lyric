@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-// import { clearFix } from 'polished';
 
 export const Wrap = styled.div`
   width: 100%;
@@ -15,7 +14,10 @@ export const Wrap = styled.div`
 `
 
 export const List = styled.ul`
+  display: flex;
+  flex-direction: column;
   margin-top: 80px;
+
   li {
     > p > span, > a > span {
       &:first-child {
@@ -39,21 +41,35 @@ export const List = styled.ul`
 `
 
 export const ListItem = styled.li`
+  display: flex;
+  margin: 10px 0;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+  line-height: 40px;
+  position: relative;
+
+  &:hover {
+    box-shadow: 0px 0px 10px 3px #95c8ff;
+  }
+
+  > div {
+    flex-basis: 60px;
+    position: relative;
+
+    > label {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
   > a {
-    display: block;
+    width: 100%;
     height: 60px;
-    margin: 10px 0;
-    padding: 10px 20px;
+    padding: 10px 20px 10px 0;
     color: #2a2a2a;
     font-size: 14px;
-    line-height: 40px;
-    border-radius: 4px;
-    background-color: #f1f1f1;
     cursor: pointer;
-
-    &:hover {
-      box-shadow: 0px 0px 10px 3px #95c8ff;
-    }
   }
 `
 

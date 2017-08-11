@@ -8,24 +8,12 @@ exports.getAllLyrics = (req, res) => {
 
   Lyric.count((err, count) => {
     if (err) throw err;
-    Lyric.find({}, { _id: 1, title: 1, published_date: 1, lyrics: 1, edit_date: 1 }, (err, lyrics) => {
+    Lyric.find({}, { _id: 1, title: 1, lyrics: 1, patterns: 1, published_date: 1 }, (err, lyrics) => {
       if (err) return res.status(500).send({ error: 'database failure', status: 500 });
-
-      const array = [];
-      _.each(lyrics, lyric => {
-        const setData = {
-          _id: lyric._id,
-          title: lyric.title,
-          published_date: lyric.published_date,
-          edit_date: lyric.edit_date || null,
-          length: lyric.lyrics.length - 1 || '-' 
-        }
-        array.push(setData);
-      });
 
       const total_page = Math.ceil(count / limit);
       const data = {
-        lyrics: array,
+        lists: lyrics,
         has_more: !(page === total_page),
         limit: limit,
         total: count,
