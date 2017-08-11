@@ -167,9 +167,17 @@ export default class Detail extends Component {
     }, () => {
       const link = document.getElementById('downloadlink');
       const text = this.state.margeType + this.state.margeText.join('');
-      setTimeout(() => {
-        link.href = this.makeTextFile(text);
-      }, 100)
+
+      const data = {
+        id: this.props.match.params.id,
+        type: this.state.margeType
+      };
+      apiCall.get('/api/lyrics/download', data).then(() => {
+        console.log(this.state.margeType);
+      });
+      // setTimeout(() => {
+      //   link.href = this.makeTextFile(text);
+      // }, 100)
     })
   }
 

@@ -17,11 +17,12 @@ exports.signup = (req, res) => {
   User.findOne({ email: req.query.email }, ( err, user ) => {
     if (err) return res.status(500).send({ error: 'database failure', status: 500 });
     if (user) return res.status(400).send({ msg: '이미 등록된 이메일입니다.', status: 400 });
-
+    
     newUser.save( (err, data) => {
       if (err) return res.status(400).send({ result: 0, status: 400 });
       res.json({ result: 'OK' });
     });
+
   });
 }
 
