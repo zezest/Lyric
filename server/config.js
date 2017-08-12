@@ -6,5 +6,7 @@ module.exports = {
   GMAIL: { 
     user: 'eskim@station3.co.kr',
     pass: 'rladmstn1'
-  }
+  },
+
+  RECIEVER: 'eskim@station3.co.kr'
 }

@@ -1,6 +1,7 @@
 const fs = require('fs');
 const config = require('../config');
 const nodemailer = require('nodemailer');
+const moment = require('moment');
 
 let smtpTransport = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -10,26 +11,30 @@ let smtpTransport = nodemailer.createTransport({
 });
 
 exports.send = (context) => {
+  const date = moment().format('YYMMDD');
+  const file_name = 'lyrics_' + date +'.txt';
   const mailOptions = {
     from: config.GMAIL.user,
-    to: 'eskim@station3.co.kr',
-    subject: 'nodemailer test',
+    to: process.env.RECIEVER || config.RECIEVER,
+    subject: 'Lyric 가사 전달',
     text: context,
     attachments: [
       {
-        fileName: 'lyrics.txt',
-        path: 'text1.txt',
+        fileName: file_name,
+        path: file_name,
       }
     ]
   };
 
-
-  fs.writeFile('text1.txt', context, 'utf8', function(err) {
-    if (err) return '서버 파일 생성 에러';
+  fs.writeFile(file_name, context, 'utf8', function(err) {
+    if (err) throw err;
 
     smtpTransport.sendMail(mailOptions, (err, res) => {
-      if (err) console.log(err);
-      else console.log('message sent success', res);
+      if (err) throw err;
+      else {
+        console.log('message sent success');
+      }
+      fs.unlink(file_name);
     });
 
     smtpTransport.close();
