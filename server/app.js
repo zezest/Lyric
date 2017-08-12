@@ -18,7 +18,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(buildPath));
 
-
 // // CONNECT TO MONGODB SERVER
 const db = mongoose.connection;
 db.on('error', console.error);
