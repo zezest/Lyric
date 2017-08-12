@@ -8,9 +8,9 @@ let smtpTransport = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: { 
-    user: process.env.smtpUser,
-    pass: process.env.smtpPass
-  } || config.GMAIL
+    user: process.env.smtpUser || config.GMAIL.user,
+    pass: process.env.smtpPass || config.GMAIL.pass
+  }
 });
 
 exports.send = (context) => {
