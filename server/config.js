@@ -8,5 +8,5 @@ module.exports = {
     pass: 'rladmstn1'
   },
 
-  RECIEVER: 'eskim@station3.co.kr'
+  RECIEVER: ''
 }
