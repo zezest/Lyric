@@ -10,8 +10,7 @@ module.exports = app => {
     else
        return res.status(401).json({
          error: 'User not authenticated'
-       })
- 
+       });
  }
 
 
@@ -45,5 +44,5 @@ module.exports = app => {
   });
 
   // LOGOUT
-  app.get('/api/logout', userController.logout);
+  app.get('/api/logout', isAuthenticated, userController.logout);
 }

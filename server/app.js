@@ -30,7 +30,8 @@ require('./config/passport')(passport);
 
 app.use(session({
   secret: 'keyboard cat',
-  
+  resave: false,
+  saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
