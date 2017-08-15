@@ -29,6 +29,16 @@ export default class Main extends Component {
   login = e => {
     e.preventDefault();
 
+    const data = {
+      email: this.state.email,
+      password: this.state.password
+    }
+
+    apiCall.get('/api/login', data).then(data => {
+      console.log(data)
+    }).catch(err => {
+      console.log(err)
+    });
   }
 
   render() {
@@ -37,7 +47,7 @@ export default class Main extends Component {
       <LoginWrap>
         <p>로그인</p>
         <LoginForm onSubmit={this.login}>
-          <PasswordInput type="text" name="email" value={this.state.passoword} onChange={this.onChangeToState} />
+          <PasswordInput type="text" name="email" value={this.state.email} onChange={this.onChangeToState} />
           <PasswordInput type="text" name="password" value={this.state.passoword} onChange={this.onChangeToState} />
           <button type="submit">
             <Icon name="arrow>" width="26" height="26" />

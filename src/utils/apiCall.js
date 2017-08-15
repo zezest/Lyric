@@ -28,7 +28,12 @@ export default class ApiCall {
     //     this.redirectTo(document, '/500')
     //     break;
     // }
-    return Promise.reject(error.response.data)
+    try {
+      return Promise.reject(error.response.data)
+    } catch(e) {
+      return Promise.reject(error)
+    }
+    
   }
 
   // redirectTo = (document, path) => {

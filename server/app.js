@@ -28,13 +28,12 @@ db.once('open', () => {
 
 require('./config/passport')(passport);
 
+app.use(session({
+  secret: 'keyboard cat',
+  
+}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true
-}));
 
 const DEFAULT_DBURL = process.env.MONGODB_URI || config.DBURL;
 mongoose.connect(DEFAULT_DBURL, {
@@ -43,7 +42,7 @@ mongoose.connect(DEFAULT_DBURL, {
 
 const router = require('./routes')(app);
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(`${buildPath}/index.html`);
 });
 
