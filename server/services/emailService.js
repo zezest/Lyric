@@ -35,7 +35,6 @@ exports.send = (context) => {
     smtpTransport.sendMail(mailOptions, (err, res) => {
       if (err) throw err;
       else {
-        alert('메일 전송이 완료되었습니다.');
         console.log('message sent success');
       }
       fs.unlink(file_name);

@@ -128,6 +128,7 @@ export default class Lyric extends Component {
     if (this.state.send_lyrics === '') return alert('내보낼 가사를 선택해주세요.');
     
     apiCall.post('/api/lyrics/send', {lyrics: this.state.send_lyrics}).then(data => {
+      alert('메일로 가사가 전송되었습니다');
       console.log(data);
     }).catch(err => {
       console.log(err);
