@@ -145,7 +145,7 @@ export default class Lyric extends Component {
   }
 
   render() {
-    const { lists, total_page, page, has_more, search, checked } = this.state;
+    const { lists, total_page, page, has_more, search, checked, send_items } = this.state;
     return (
       <Wrap style={{paddingBottom: total_page > 1 ? '0' : '80px'}}>
         
@@ -158,7 +158,9 @@ export default class Lyric extends Component {
             </button>
           </SearchBox>
           <UtilsWrap>
-            <button type="button" onClick={this.onClickSend}>선택 가사 이메일 내보내기</button>
+            <button type="button" onClick={this.onClickSend} disabled={send_items.length <= 0}>
+              선택 가사 이메일 내보내기
+            </button>
             <NavLink activeClassName="active" to="/form">추가</NavLink>
           </UtilsWrap>
         </Header>

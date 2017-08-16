@@ -41,7 +41,7 @@ export const List = styled.ul`
 export const ListItem = styled.li`
   display: flex;
   margin: 10px 0;
-  border-radius: 4px;
+  border-radius: 2px;
   background-color: #f1f1f1;
   line-height: 40px;
   position: relative;
@@ -114,15 +114,22 @@ export const UtilsWrap = styled.div`
     width: 200px;
     height: 40px;
     color: #fff;
+    font-size: 14px;
     border: 0;
     background-color: #483D8B;
+
+    &:disabled {
+      color: #aaa;
+      background-color: #f1f1f1;
+    }
   }
   
   > a {
     width: 50px;
     height: 40px;
     color: #fff;
-    line-height: 40px;
+    font-size: 14px;
+    line-height: 42px;
     text-align: center;
     background-color: #483D8B;
   }
