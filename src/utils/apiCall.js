@@ -17,17 +17,17 @@ export default class ApiCall {
   }
 
   handleError = error => {
-    // switch (error.response.status) {
-    //   case 401:
-    //     this.redirectTo(document, '/')
-    //     break;
-    //   case 404:
-    //     this.redirectTo(document, '/404')
-    //     break;
-    //   default:
-    //     this.redirectTo(document, '/500')
-    //     break;
-    // }
+    switch (error.response.status) {
+      case 401:
+        this.redirectTo(document, '/login')
+        break;
+      // case 404:
+      //   this.redirectTo(document, '/404')
+      //   break;
+      // default:
+      //   this.redirectTo(document, '/500')
+      //   break;
+    }
     try {
       return Promise.reject(error.response.data)
     } catch(e) {
@@ -36,9 +36,9 @@ export default class ApiCall {
     
   }
 
-  // redirectTo = (document, path) => {
-  //   document.location = path
-  // }
+  redirectTo = (document, path) => {
+    document.location = path
+  }
   
   get(path, params, callback) {
     return this.apiCall.request({

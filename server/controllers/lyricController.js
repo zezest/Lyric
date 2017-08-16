@@ -6,10 +6,15 @@ const emailService = require('../services/emailService');
 exports.getAllLyrics = (req, res) => {
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.limit) || 2
+  const isSearch = req.query.search === '' ? false : true;
+  let data = {};
+  if (isSearch) {
+    data = { title: {$regex: new RegExp(req.query.search), $options: 'i'} }
+  }
 
   Lyric.count((err, count) => {
     if (err) throw err;
-    Lyric.find({}, { _id: 1, title: 1, lyrics: 1, patterns: 1, published_date: 1 }, (err, lyrics) => {
+    Lyric.find(data, { _id: 1, title: 1, lyrics: 1, patterns: 1, published_date: 1 }, (err, lyrics) => {
       if (err) return res.status(500).send({ error: 'database failure', status: 500 });
 
       const total_page = Math.ceil(count / limit);
@@ -35,37 +40,32 @@ exports.getSingleLyric = (req, res) => {
   })
 }
 
-exports.getSearchLyrics = (req, res) => {
-  const page = Number(req.query.page) || 1;
-  const limit = Number(req.query.limit) || 2;
+// exports.getSearchLyrics = (req, res) => {
+//   const page = Number(req.query.page) || 1;
+//   const limit = Number(req.query.limit) || 2;
 
-  Lyric.count((err, count) => {
-    Lyric.find({title: {$regex: new RegExp(req.params.title), $options: 'i'}}, { _id: 1, title: 1, lyrics: 1, published_date: 1 }, (err, lyrics) => {
-      if (err) return res.status(500).json({ error: err, status: 500 });
+//   Lyric.count((err, count) => {
+//     Lyric.find({
+//       title: {$regex: new RegExp(req.params.title), $options: 'i'}
+//     }, { 
+//       _id: 1, title: 1, lyrics: 1, patterns: 1, published_date: 1
+//     }, (err, lyrics) => {
+//       if (err) return res.status(500).json({ error: err, status: 500 });
 
-      const array = [];
-      _.each(lyrics, lyric => {
-        const setData = {
-          _id: lyric._id,
-          title: lyric.title,
-          published_date: lyric.published_date,
-          length: lyric.lyrics.length - 1 || '-'
-        }
-        array.push(setData);
-      });
+//       const total_page = Math.ceil(count / limit);
+//       const data = {
+//         lists: lyrics,
+//         has_more: !(page === total_page),
+//         limit: limit,
+//         total: count,
+//         page: page,
+//         total_page: total_page,
+//       }
 
-      const total_page = Math.ceil(count / limit);
-      const data = {
-        lyrics: array,
-        has_more: !(page === total_page),
-        limit: limit,
-        page: page,
-        total_page: total_page,
-      }
-      res.json(data);
-    }).sort({"published_date": -1 }).skip((page - 1) * limit).limit(limit);
-  });
-}
+//       res.json(data);
+//     }).sort({"published_date": -1 }).skip((page - 1) * limit).limit(limit);
+//   });
+// }
 
 exports.postCreateLyric = (req, res) => {
   const lyric = new Lyric();
@@ -86,7 +86,7 @@ exports.putUpdateLyric = (req, res) => {
   Lyric.update({ _id: req.params.lyric_id }, { $set: req.body }, (err, output) => {
     if (err) res.status(500).json({ error: 'database failure', status: 500 });
     if (!output.n) return res.status(404).json({ error: 'lyric not found', status: 404 });
-    res.json( { message: 'lyric updated' } );
+    res.json({ message: 'lyric updated' });
   });
 }
 
@@ -108,5 +108,5 @@ exports.sendLyric = (req, res) => {
     throw exception;
   }
 
-  return res.json( { message: 'ok'} );
+  return res.json({ message: 'ok'});
 }

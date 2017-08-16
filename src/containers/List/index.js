@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import _ from 'lodash';
 import moment from 'moment';
 
+import { apiCall } from '../../common';
+import Icon from '../../components/Icon';
 import Pagination from '../../components/Pagination';
 import Input from '../../components/TextField/input';
 import Checkbox from '../../components/Checkbox';
-import { apiCall } from '../../common';
 
 import {
-  Wrap, List, ListItem, Header, SearchBox
+  Wrap, List, ListItem, Header, UtilsWrap, SearchBox
 } from './styled';
 
 const ItemWrap = ({ item, checked, onChecked }) => {
@@ -36,7 +37,7 @@ export default class Lyric extends Component {
       page: 1,
       total: 0,
       total_page: 0,
-      keyword: '',
+      search: '',
       send_items: [],
       send_lyrics: '',
     }
@@ -50,6 +51,7 @@ export default class Lyric extends Component {
 
   getLyricList = (page = 1) => {
     apiCall.get(`/api/lyrics`, {
+      search: this.state.search || '',
       page: page,
       limit: 10,
     }).then(data => {
@@ -75,7 +77,9 @@ export default class Lyric extends Component {
   onChangeToState = e => {
     const { name, value } = e.target;
 
-    this.setState({keyword: value});
+    this.setState({
+      [name]: value
+    });
   }
 
   onChecked = (item, e) => {
@@ -127,7 +131,7 @@ export default class Lyric extends Component {
   onClickSend = e => {
     if (this.state.send_lyrics === '') return alert('내보낼 가사를 선택해주세요.');
     
-    apiCall.post('/api/lyrics/send', {lyrics: this.state.send_lyrics}).then(data => {
+    apiCall.post('/api/lyrics/send', { lyrics: this.state.send_lyrics }).then(data => {
       alert('메일로 가사가 전송되었습니다');
       console.log(data);
     }).catch(err => {
@@ -135,44 +139,28 @@ export default class Lyric extends Component {
     });
   }
 
-  onKeyDownValue = e => {
-    e.keyCode === 13 ? this.onClickSearch() : null;
-  }
-
-  onClickSearch = () => {
-    const { keyword } = this.state;
-    if(keyword.length > 0) {
-      apiCall.get(`/api/lyrics/title/${keyword}`, {
-        limit: 10,
-      }).then(data => {
-        this.setState({
-          lists: data.lyrics,
-          has_more: data.has_more,
-          page: data.page,
-          total: data.total,
-          total_page: data.total_page,
-        });
-      }).catch(err => {
-        console.log(err);
-      });
-    } else {
-      this.getLyricList();
-    }
-    
+  onSubmitSearch = e => {
+    e.preventDefault();
+    this.getLyricList();
   }
 
   render() {
-    const { lists, total_page, page, has_more, keyword, checked } = this.state;
+    const { lists, total_page, page, has_more, search, checked } = this.state;
     return (
       <Wrap style={{paddingBottom: total_page > 1 ? '0' : '80px'}}>
         
         <Header>
           <h1>리스트</h1>
-          <button type="button" onClick={this.onClickSend}>선택 가사 이메일 내보내기</button>
-          <SearchBox onKeyDown={this.onKeyDownValue}>
-            <Input type="text" name='search' title="Search" value={keyword} autoComplete="off" onChange={this.onChangeToState} ></Input> 
-            <button onClick={this.onClickSearch}>검색</button>
+          <SearchBox onSubmit={this.onSubmitSearch}>
+            <input type="text" name='search' value={search} autoComplete="off" onChange={this.onChangeToState} placeholder="제목으로 검색" /> 
+            <button type="submit">
+              <Icon name="arrow>" width="26" height="26" />
+            </button>
           </SearchBox>
+          <UtilsWrap>
+            <button type="button" onClick={this.onClickSend}>선택 가사 이메일 내보내기</button>
+            <NavLink activeClassName="active" to="/form">추가</NavLink>
+          </UtilsWrap>
         </Header>
 
         <List>

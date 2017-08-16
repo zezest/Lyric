@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import { apiCall } from '../../common';
 import Input from '../../components/TextField/input';
 
 import {
@@ -53,18 +54,30 @@ export default class Signup extends Component {
   onSubmit = e => {
     e.preventDefault();
     if (!this.validate()) return;
+    const { name, email, password } = this.state;
+    apiCall.post('/api/user/add', {
+      email: email,
+      password: password,
+      name: name,
+    }).then(data => {
+      alert('회원가입이 완료되었습니다.');
+      window.location.href = '/';
+
+    }).catch(err => {
+      console.log(err);
+    })
   }
 
   render() {
     const { name, email, password, password_confirm } = this.state;
     return (
       <SignupForm onSubmit={this.onSubmit}>
-        <h1>Sign-Up</h1>
-        <Input type="email" name="email" value={email} onChange={this.onChangeToState} autoComplete="off" title="Email" hint="lyrics@lyrics.com" />
-        <Input type="password" name="password" value={password} onChange={this.onChangeToState} autoComplete="off" title="Password" />
-        <Input type="password" name="password_confirm" value={password_confirm} onChange={this.onChangeToState} autoComplete="off" title="password confirm" />
-        <Input type="text" name="name" value={name} onChange={this.onChangeToState} autoComplete="off" title="Name" hint="홍길동" />
-        <Submit>Submit</Submit>
+        <h1>회원가입</h1>
+        <Input type="email" name="email" value={email} onChange={this.onChangeToState} autoComplete="off" title="이메일" hint="lyrics@lyrics.com" />
+        <Input type="password" name="password" value={password} onChange={this.onChangeToState} autoComplete="off" title="비밀번호" />
+        <Input type="password" name="password_confirm" value={password_confirm} onChange={this.onChangeToState} autoComplete="off" title="비밀번호 확인" />
+        <Input type="text" name="name" value={name} onChange={this.onChangeToState} autoComplete="off" title="이름" hint="홍길동" />
+        <Submit>가입하기</Submit>
       </SignupForm>
     )
   }

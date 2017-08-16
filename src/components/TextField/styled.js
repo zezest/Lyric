@@ -2,16 +2,16 @@ import styled from 'styled-components';
 export const FormGroup = styled.label`
   display: block;
   margin-top: 2.25rem;
-  margin-bottom: 2.25rem;
+  margin-bottom: 1rem;
   position: relative;
 
   input, textarea {
     display: block;
     background: none;
     padding: 2px 2px 1px;
-    font-size: 1rem;
+    font-size: 1.2rem;
     border: 0 solid transparent;
-    line-height: 2rem;
+    line-height: 2.5rem;
     width: 100%;
     color: #2a2a2a;
     // transition: all 0.1s ease-out;
@@ -19,10 +19,11 @@ export const FormGroup = styled.label`
   }
 
   .Title {
+    padding: 2px 2px 1px;
     color: ${props => props.isValid ? '#483D8B' : '#585858'};
     font-size: ${props => props.isValid ? '1' : '1.2'}rem;
     position: absolute;
-    top: ${props => props.isValid ? '-1' : '0.5'}rem;
+    top: ${props => props.isValid ? '-1.2' : '0.7'}rem;
     transition: all 0.28s ease
   }
 
@@ -30,7 +31,7 @@ export const FormGroup = styled.label`
     padding-left: 2px;
     color: #aaa;
     position: absolute;
-    top: 0.6rem;
+    top: 0.7rem;
     z-index: -1;
     opacity: ${props => props.isShowHint ? '1' : '0'};
     transform: translateX(${props => props.isShowHint ? '0' : '20px'});

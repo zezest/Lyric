@@ -14,7 +14,7 @@ const Input = ({ isValid, title, type, name, value, onChange, onFocus, onBlur, p
       onChange={onChange}
       onFocus={onFocus}
       onBlur={onBlur}
-      autoComplete={autoComplete}
+      autoComplete="off"
     />
     <p className="Hint">{hint}</p>
     <p className="Title">{title}</p>

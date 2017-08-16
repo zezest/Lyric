@@ -25,7 +25,8 @@ const Group = WrappedComponet => class extends Component {
   render() {
     const { isFocus } = this.state;
     const { value } = this.props;
-
+    console.log(value)
+    console.log(this.props.type)
     return (
       <WrappedComponet
         {...this.props} 

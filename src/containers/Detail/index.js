@@ -58,8 +58,9 @@ export default class Detail extends Component {
         this.setState({ fileName: this.state.data.title });
         this.joinPattern();
       })
-    }).catch(err => {
+    }).catch((err, status) => {
       console.log(err)
+      console.log(status)
       if (err.status === 404) {
         alert('존재하지않는 가사입니다.');
         window.location.href = '/list';

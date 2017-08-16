@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrap = styled.div`
-  width: 100%;
-  max-width: 900px;
+  width: 900px;
   margin: 0 auto;
   padding: 20px;
   padding-bottom: 0;
@@ -16,7 +15,6 @@ export const Wrap = styled.div`
 export const List = styled.ul`
   display: flex;
   flex-direction: column;
-  margin-top: 80px;
 
   li {
     > p > span, > a > span {
@@ -79,24 +77,53 @@ export const Header = styled.div`
   position: relative;
 `
 
-export const SearchBox = styled.div`
-  width: 250px;
-  position: absolute;
-  right: 0;
+export const SearchBox = styled.form`
+  display: flex;
+  height: 60px;
+  margin: 20px 0;
+  justify-content: space-between;
+  position: relative;
 
-  > label {
-    display: inline-block;
-    width: 85%;
-    margin-top: 1.25rem;
-    margin-bottom: 1.25rem;
+  > input {
+    width: 100%;
+    font-size: 27px;
+    border: 0;
+    border-bottom: 3px solid #483D8B;
   }
 
   > button {
-    color: #fff;
-    height: 32px;
-    width: 15%;
-    background-color: #483D8B;
-    cursor: pointer;
+    height: 100%;
     border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+
+    > svg {
+      fill: #483D8B;
+    }
+  }
+`
+
+export const UtilsWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  
+  > button {
+    width: 200px;
+    height: 40px;
+    color: #fff;
+    border: 0;
+    background-color: #483D8B;
+  }
+  
+  > a {
+    width: 50px;
+    height: 40px;
+    color: #fff;
+    line-height: 40px;
+    text-align: center;
+    background-color: #483D8B;
   }
 `

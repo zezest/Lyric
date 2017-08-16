@@ -9,7 +9,8 @@ module.exports = app => {
        return next();
     else
        return res.status(401).json({
-         error: 'User not authenticated'
+         error: '로그인을 해주세요.',
+         status: 401,
        });
  }
 
@@ -17,32 +18,28 @@ module.exports = app => {
 
   // GET ALL LYRIC
   app.get('/api/lyrics', lyricController.getAllLyrics);
-
   // GET SINGLE LYRIC
   app.get('/api/lyrics/:lyric_id', isAuthenticated, lyricController.getSingleLyric);
-
+  // // FIND LYRICS BY TITLE
+  // app.get('/api/lyrics/title/:title', lyricController.getSearchLyrics);
+  // EMAIL SEND
+  app.post('/api/lyrics/send', isAuthenticated, lyricController.sendLyric);
   // CREATE LYRIC
   app.post('/api/lyrics', isAuthenticated, lyricController.postCreateLyric);
-
   // UPDATE THE LYRIC
   app.put('/api/lyrics/:lyric_id', isAuthenticated, lyricController.putUpdateLyric);
-
   // DELETE LYRIC
   app.delete('/api/lyrics/:lyric_id', isAuthenticated, lyricController.deleteLyric);
 
-  // FIND LYRICS BY TITLE
-  app.get('/api/lyrics/title/:title', lyricController.getSearchLyrics);
-
-  // EMAIL SEND
-  app.post('/api/lyrics/send', isAuthenticated, lyricController.sendLyric);
-
-  // JOIN
-  app.get('/api/user/add', userController.signup);
-
-  app.get('/api/login', passport.authenticate('login'), ( req, res ) => {
-    return res.json( { msg: 'success' } );
-  });
 
   // LOGOUT
   app.get('/api/logout', isAuthenticated, userController.logout);
+  // LOGIN
+  app.post('/api/login', passport.authenticate('login'), ( req, res ) => {
+    return res.json( { msg: 'success' } );
+  });
+  // JOIN
+  app.post('/api/user/add', userController.signup);
+  // GET ALL USERS
+  app.get('/api/users', userController.getAllUsers);
 }

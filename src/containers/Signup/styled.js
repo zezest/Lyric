@@ -2,11 +2,15 @@ import styled from 'styled-components';
 
 export const SignupForm = styled.form`
   width: 400px;
-  margin: 0 auto;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  > h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
 `
 
 export const Submit = styled.button.attrs({
