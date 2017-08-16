@@ -40,7 +40,7 @@ export default class Main extends Component {
       password: this.state.password
     }
 
-    apiCall.get('/api/login', data).then(data => {
+    apiCall.post('/api/login', data).then(data => {
       console.log('로그인 성공');
       alert('로그인되었습니다.');
     }).catch(err => {

@@ -1,6 +1,5 @@
 const User = require('../models/user');
 const config = require('../config');
-const passport = require('passport');
 
 /**
  * 회원가입
@@ -24,12 +23,6 @@ exports.signup = (req, res) => {
       res.json({ result: 'OK' });
     });
   });
-}
-
-exports.login = (req, res) => {
-  passport.authenticate('login'), ( req, res ) => {
-    return res.json({ msg: 'success' });
-  }
 }
 
 /**

@@ -14,8 +14,6 @@ module.exports = app => {
        });
  }
 
-
-
   // GET ALL LYRIC
   app.get('/api/lyrics', lyricController.getAllLyrics);
   // GET SINGLE LYRIC
