@@ -6,12 +6,12 @@ const passport = require('passport');
 module.exports = app => {
   const isAuthenticated = ( req, res, next ) => {
     if(req.user)
-       return next();
+      return next();
     else
-       return res.status(401).json({
-         error: '로그인을 해주세요.',
-         status: 401,
-       });
+      return res.status(401).json({
+        error: '로그인을 해주세요.',
+        status: 401,
+      });
  }
 
   // GET ALL LYRIC
@@ -34,7 +34,14 @@ module.exports = app => {
   app.get('/api/logout', isAuthenticated, userController.logout);
   // LOGIN
   app.post('/api/login', passport.authenticate('login'), ( req, res ) => {
-    return res.json( { msg: 'success' } );
+    const userInfo = req.session.passport.user;
+    const user = {
+      email: userInfo.email,
+      name: userInfo.name,
+      id: userInfo.id
+    }
+    
+    return res.json( user );
   });
   // JOIN
   app.post('/api/user/add', userController.signup);
