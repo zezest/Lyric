@@ -2,6 +2,7 @@ const Lyric = require('../models/lyric');
 const _ = require('lodash');
 const moment = require('moment');
 const emailService = require('../services/emailService');
+const fs = require('fs');
 
 exports.getAllLyrics = (req, res) => {
   const page = Number(req.query.page) || 1;
@@ -99,11 +100,28 @@ exports.deleteLyric = (req, res) => {
 
 
 exports.sendLyric = (req, res) => {
-
   var lyrics = req.body.lyrics;
+  var array = lyrics.split("---");
+  var titles = [];
+
+  try{
+    _.each(array, lyric => {
+      let title = lyric.split('\n')[0];
+      const fileName = emailService.makeFile(title, lyric);
+      titles.push(
+        { name: fileName+'.txt', path: fileName+".txt" }
+      );
+    });
+  } catch (exception) {
+    console.log('exception ', exception);
+    _.each(titles, title => {
+      fs.unlink(title.name);
+    })
+    throw exception;
+  }
 
   try {
-    emailService.send(lyrics);
+    emailService.send(titles, lyrics);
   } catch (exception) {
     throw exception;
   }

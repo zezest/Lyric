@@ -124,7 +124,7 @@ export default class Lyric extends Component {
     });
 
     this.setState({
-      send_lyrics: eachLyrics.join('\n\n')
+      send_lyrics: eachLyrics.join('\n\n---')
     });
   }
 
