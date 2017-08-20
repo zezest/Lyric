@@ -29,7 +29,7 @@ export default class Vedio extends Component {
   reqTest = (lib) => {
     lib.request({
       // path:'/users/30439308/videos',
-      path:'/users/30439308/videos?query=5부*',
+      path:'/users/30439308/videos?query=5부*', 
       query: {
         page: 1,
         per_page: 10
