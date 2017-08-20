@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect, withRouter } from 're
 
 import Header from './containers/Header';
 import List from './containers/List';
+import VideoList from './containers/VideoList';
 import Form from './containers/Form';
 import Detail from './containers/Detail';
 import Login from './containers/Login';
@@ -23,6 +24,7 @@ render(
         
       <Switch>
         <Route exact path="/list" component={List}/>
+        <Route path="/video" component={VideoList}/>
         <Route path="/form/:id" component={Form} /> 
         <Route path="/form" component={Form} />
         <Route path="/detail/:id" component={Detail} />
