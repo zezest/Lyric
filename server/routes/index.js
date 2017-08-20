@@ -21,7 +21,8 @@ module.exports = app => {
   // // FIND LYRICS BY TITLE
   // app.get('/api/lyrics/title/:title', lyricController.getSearchLyrics);
   // EMAIL SEND
-  app.post('/api/lyrics/send', isAuthenticated, lyricController.sendLyric);
+  app.post('/api/lyrics/send', lyricController.sendLyric);
+  // app.post('/api/lyrics/send', isAuthenticated, lyricController.sendLyric);
   // CREATE LYRIC
   app.post('/api/lyrics', isAuthenticated, lyricController.postCreateLyric);
   // UPDATE THE LYRIC

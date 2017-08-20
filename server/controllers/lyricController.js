@@ -100,28 +100,28 @@ exports.deleteLyric = (req, res) => {
 
 
 exports.sendLyric = (req, res) => {
-  var lyrics = req.body.lyrics;
-  var array = lyrics.split("---");
-  var titles = [];
+  var context = req.body.lyrics;
+  var array = context.split("---\n");
+  var lyrics = [];
 
   try{
     _.each(array, lyric => {
       let title = lyric.split('\n')[0];
       const fileName = emailService.makeFile(title, lyric);
-      titles.push(
-        { name: fileName+'.txt', path: fileName+".txt" }
+      lyrics.push(
+        { name: fileName+'.txt', context: lyric }
       );
     });
   } catch (exception) {
     console.log('exception ', exception);
     _.each(titles, title => {
-      fs.unlink(title.name);
-    })
+      fs.unlink(lyrics.name);
+    });
     throw exception;
   }
 
   try {
-    emailService.send(titles, lyrics);
+    emailService.send(lyrics, context);
   } catch (exception) {
     throw exception;
   }
