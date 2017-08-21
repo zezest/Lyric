@@ -105,8 +105,8 @@ exports.sendLyric = (req, res) => {
   var lyrics = [];
 
   try{
-    _.each(array, lyric => {
-      let title = lyric.split('\n')[0];
+    _.each(array, ( lyric, i ) => {
+      let title = i+1 + '. ' + lyric.split('\n')[0];
       const fileName = emailService.makeFile(title, lyric);
       lyrics.push(
         { name: fileName+'.txt', context: lyric }
@@ -114,7 +114,7 @@ exports.sendLyric = (req, res) => {
     });
   } catch (exception) {
     console.log('exception ', exception);
-    _.each(titles, title => {
+    _.each(lyrics, title => {
       fs.unlink(lyrics.name);
     });
     throw exception;

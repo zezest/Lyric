@@ -66,11 +66,6 @@ exports.send = (lyrics, context) => {
 
 exports.makeFile = ( title, context ) => {
   let fileName = title;
-  while(true) {
-    if(fs.existsSync(fileName+'.txt'))
-      fileName = fileName+'_dupl';
-    else break;
-  }
 
   fs.writeFileSync(fileName+'.txt', context, 'utf8');
   
