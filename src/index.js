@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter as Router, Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import Header from './containers/Header';
 import List from './containers/List';
@@ -10,8 +10,6 @@ import Detail from './containers/Detail';
 import Login from './containers/Login';
 import Signup from './containers/Signup';
 import NoMatch from './containers/NoMatch';
-
-import { auth } from './common';
 
 import registerServiceWorker from './registerServiceWorker';
 

@@ -169,16 +169,16 @@ export default class Detail extends Component {
       const link = document.getElementById('downloadlink');
       const text = this.state.margeType + this.state.margeText.join('');
 
-      const data = {
-        id: this.props.match.params.id,
-        type: this.state.margeType
-      };
-      apiCall.get('/api/lyrics/download', data).then(() => {
-        console.log(this.state.margeType);
-      });
-      // setTimeout(() => {
-      //   link.href = this.makeTextFile(text);
-      // }, 100)
+      // const data = {
+      //   id: this.props.match.params.id,
+      //   type: this.state.margeType
+      // };
+      // apiCall.get('/api/lyrics/download', data).then(() => {
+      //   console.log(this.state.margeType);
+      // });
+      setTimeout(() => {
+        link.href = this.makeTextFile(text);
+      }, 100)
     })
   }
 
@@ -209,7 +209,7 @@ export default class Detail extends Component {
 
   render() {
     const { data, margeText, fileName } = this.state;
-    const { title, lyrics, _id, patterns, published_date, edit_date } = data;
+    const { title, lyrics, published_date, edit_date } = data;
     const id = this.props.match.params.id;
 
     return (

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { apiCall } from '../../common';
-import Icon from '../../components/Icon';
+// import Icon from '../../components/Icon';
 import Input from '../../components/TextField/input';
 
 import {

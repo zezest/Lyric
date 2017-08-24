@@ -9,7 +9,6 @@ import Textarea from '../../components/TextField/textarea';
 
 import {
   Wrap, LyricFormWrap,
-  ContentTitle,
   LyricWrap,
   CustomBtn,
 } from './styled';

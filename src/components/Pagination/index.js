@@ -11,7 +11,7 @@ export default class Pagination extends Component {
   movePage = e => {
     const { name } = e.target;
     const { page, has_more, getPage } = this.props;
-    console.log(name, has_more, page)
+    
     if (name === 'next' && !has_more) return;
     if (name === 'prev' && Number(page) === 1) return;
 
@@ -26,7 +26,7 @@ export default class Pagination extends Component {
   }
 
   render() {
-    const { page, total_page, has_more } = this.props;
+    const { page, total_page } = this.props;
     const startPage = Math.ceil(page / 10);
     const endPage = total_page > (startPage + 10) ? startPage + 10 : total_page + 1;
     

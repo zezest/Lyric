@@ -1,6 +1,7 @@
 // Controllers
 const lyricController = require('../controllers/lyricController');
 const userController = require('../controllers/userController');
+const vimeoController = require('../controllers/vimeoController');
 const passport = require('passport');
 
 module.exports = app => {
@@ -14,6 +15,9 @@ module.exports = app => {
       });
  }
 
+  /**
+   *  LYRIC API
+   */
   // GET ALL LYRIC
   app.get('/api/lyrics', lyricController.getAllLyrics);
   // GET SINGLE LYRIC
@@ -30,6 +34,9 @@ module.exports = app => {
   app.delete('/api/lyrics/:lyric_id', isAuthenticated, lyricController.deleteLyric);
 
 
+  /**
+   *  USER API
+   */
   // LOGOUT
   app.get('/api/logout', isAuthenticated, userController.logout);
   // LOGIN
@@ -47,4 +54,10 @@ module.exports = app => {
   app.post('/api/user/add', userController.signup);
   // GET ALL USERS
   app.get('/api/users', userController.getAllUsers);
+
+
+  /**
+   *  VIMEO API
+   */
+  app.get('/api/video/list', vimeoController.getVideo);
 }
