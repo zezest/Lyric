@@ -43,13 +43,16 @@ exports.getVideo = (req, res) => {
     const items = body.data;
     const l = items.length || 1;
     const array = [];
+
     for (let i = 0; i < l; i++) {
       const item = items[i];
+      const urls = item.uri.split('/');
+      const url = urls[urls.length - 1];
       array[i] = {
         thumbnail_img: item.pictures.sizes[2],
         name: item.name,
         save_date: item.created_time,
-        embed: item.embed,
+        video_url: url,
       }
     }
 
