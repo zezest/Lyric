@@ -43,11 +43,25 @@ export const PlayerWrap = styled.div`
   height: 100%;
   max-width: 640px;
   max-height: 430px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   > h1 {
     margin-bottom: 20px;
     color: #fff;
     font-size: 20px;
+  }
+
+  > button {
+    width: 85px;
+    height: 30px;
+    margin-top: 10px;
+    color: #fff;
+    font-size: 14px;
+    border: 0;
+    background-color: #483D8B;
   }
 `
 

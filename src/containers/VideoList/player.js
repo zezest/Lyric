@@ -18,12 +18,6 @@ export default class VimeoPlayer extends Component {
     console.log(nextProps)
   }
 
-  // init = () => {
-  //   const { idx } = this.props;
-  //   this.player = new Player('iframe_vimeo');
-  //   console.log(this.player)
-  // }
-
   onFullScreen = () => {
     const { idx } = this.props;
     const i = document.getElementById('iframe_vimeo');
