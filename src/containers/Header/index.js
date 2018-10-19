@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { apiCall } from '../../common';
 
 import {
@@ -17,11 +17,17 @@ export default class Header extends Component {
         <Menu>
           <li className="Logo">
             <a href="/list" style={{color:'#fff'}}><h1>LYRICS</h1></a>
-          </li> 
+          </li>
+          <li>
+            <NavLink to="/list" style={{color:'#fff'}}>목록</NavLink>
+          </li>
+          <li>
+            <NavLink to="/video" style={{color:'#fff'}}>동영상</NavLink>
+          </li>
         </Menu>
         <LoginWrap>
           <NavLink activeClassName="active" to="/login">로그인</NavLink>
-          <a onClick={this.onClickLogout}>로그아웃</a>
+          {/* <a onClick={this.onClickLogout}>로그아웃</a> */}
         </LoginWrap>
       </HeaderNav>
     )

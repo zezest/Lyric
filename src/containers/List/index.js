@@ -6,7 +6,6 @@ import moment from 'moment';
 import { apiCall } from '../../common';
 import Icon from '../../components/Icon';
 import Pagination from '../../components/Pagination';
-import Input from '../../components/TextField/input';
 import Checkbox from '../../components/Checkbox';
 
 import {
@@ -83,7 +82,7 @@ export default class Lyric extends Component {
   }
 
   onChecked = (item, e) => {
-    const { name, checked } = e.target;
+    const { checked } = e.target;
     let sendItems = _.clone(this.state.send_items);
 
     if (checked) {
@@ -148,9 +147,9 @@ export default class Lyric extends Component {
     const { lists, total_page, page, has_more, search, checked, send_items } = this.state;
     return (
       <Wrap style={{paddingBottom: total_page > 1 ? '0' : '80px'}}>
+        <h1>가사 리스트</h1>
         
         <Header>
-          <h1>리스트</h1>
           <SearchBox onSubmit={this.onSubmitSearch}>
             <input type="text" name='search' value={search} autoComplete="off" onChange={this.onChangeToState} placeholder="제목으로 검색" /> 
             <button type="submit">

@@ -8,7 +8,7 @@ export const Wrap = styled.div`
 
   > h1 {
     margin-bottom: 20px;
-    font-size: 18px;
+    font-size: 20px;
   }
 `
 
